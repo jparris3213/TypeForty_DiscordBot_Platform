@@ -13,7 +13,7 @@ const client = new Discord.Client({
     ]
 });
 
-const prefix = "!"
+const prefix = "/"
 
 client.on("messageCreate", function(message) {
     
