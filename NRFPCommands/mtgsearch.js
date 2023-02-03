@@ -1,4 +1,6 @@
-
+const mtg = require('mtgsdk');
+const inquirer = require("inquirer");
+const { SlashCommandBuilder } = require('discord.js');
 //Below This Point is the old MTG_Search Logic TODO: Integrate with Discord Bot
 const question = [
 
