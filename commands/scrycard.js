@@ -17,6 +17,7 @@ module.exports = {
             return interaction.reply(`No Results found for ${value}`);
         };
 
+        console.log(`User Searched for ${mtg_scry[0].name}`)
         var description_splice1 = mtg_scry[0].text.slice(0,42)
         var description_splice2 = mtg_scry[0].text.slice(42,84)
         var description_splice3 = mtg_scry[0].text.slice(84,126)
