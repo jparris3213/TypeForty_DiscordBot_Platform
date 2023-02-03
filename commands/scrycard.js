@@ -12,30 +12,28 @@ module.exports = {
     async execute(interaction) {
         const value = interaction.options.getString('cardname');
         const mtg_scry = await mtg.card.where({name: value});
-        //console.log(mtg_scry)
 
-        //const { card_info } = await mtg_scry;
-        
-/*         if (!card_info) {
+         if (!mtg_scry.length) {
             return interaction.reply(`No Results found for ${value}`);
-        }; */
+        };
 
-        console.log(mtg_scry[0])
-        
+        var description_splice1 = mtg_scry[0].text.slice(0,42)
+        var description_splice2 = mtg_scry[0].text.slice(42,84)
+        var description_splice3 = mtg_scry[0].text.slice(84,126)
+        var description_splice4 = mtg_scry[0].text.slice(126,167)
+
         return interaction.reply(
-            `\n
-            |==================================
+            `Card Info:
+
             | Card: ${mtg_scry[0].name}
-            |--------------------------|
-            | Colors: ${mtg_scry[0].colorIdentity}|
-            | Total Mana Cost: ${mtg_scry[0].cmc}|
-            |--------------------------|
-            | Type: ${mtg_scry[0].types}|
-            |--------------------------|
+            | Colors: ${mtg_scry[0].colorIdentity}
+            | Total Mana Cost: ${mtg_scry[0].cmc}
+            | Type: ${mtg_scry[0].types}
             | Text: 
-            | ${mtg_scry[0].text}
-            |
-            |==================================
+            | ${description_splice1}
+            | ${description_splice2}
+            | ${description_splice3}
+            | ${description_splice4}
             `)
 
     }
