@@ -4,7 +4,7 @@ const mtg = require(`mtgsdk`);
     
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('scrycard')
+        .setName('scry')
         .setDescription('Searches MTG API for Card Info')
         .addStringOption(option => option.setName('cardname').setDescription('Search By Card name')),
 
