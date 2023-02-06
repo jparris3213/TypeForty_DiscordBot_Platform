@@ -34,7 +34,7 @@ const questionFunc = () => {
     return inquirer.prompt(GPTquestion);
 }
 
-
+//Nuts and Bolts of this one
 async function response(prompt_data) {
     const prompt = await openai.createCompletion({
         model: "text-davinci-003",
