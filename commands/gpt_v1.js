@@ -56,7 +56,7 @@ module.exports = {
                 stop: [" Human:", " AI:"],
               }).catch(err => console.error(err));
               
-                return interaction.followUp(`The User asked the following question:${gpt_input} and recieved the following response from ChatGPT AI: ${gpt_interact.data.choices[0].text}`)
+                return interaction.followUp(`The User asked the following question:\n \n ${gpt_input} \n The User recieved the following response from ChatGPT AI:${gpt_interact.data.choices[0].text}`)
                 
               }
             }
