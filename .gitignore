@@ -1,4 +1,5 @@
 /node_modules
+/__old_commands
 npm-debug.log
 /config.json
 .env
