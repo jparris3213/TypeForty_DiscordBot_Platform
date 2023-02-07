@@ -1,4 +1,5 @@
 const { Configuration, OpenAIApi } = require("openai");
+const wait = require(`node:timers/promises`)
 const {chat_token} = require('../config.json');
 const configuration = new Configuration({
     apiKey: chat_token,
@@ -28,8 +29,7 @@ async function response(prompt_data) {
         return console.log("Nope Didn't Work", data, prompt_data);
       }
       console.log(prompt.data.choices[0].text);
-    
-      return prompt.data.choices[0].text
+      return interaction.editReply(prompt.data.choices[0].text);//
 }
 
 
@@ -41,15 +41,25 @@ module.exports = {
         .addStringOption(option => option.setName('promptresponse').setDescription('Ask ChatGPT')),
 
     async execute(interaction) {
-        const gpt_input = interaction.options.getString('promptresponse');
-        
-        const gpt_interact = await response(gpt_input);
+        interaction.deferReply("Placeholder...");
 
-            if (!gpt_input.length) {
-                return interaction.reply(`no results found for ${gpt_input}`)
-        };
+        const gpt_input = interaction.options.getString('promptresponse');  
+
+        const gpt_interact = await openai.createCompletion({
+                model: "text-davinci-003",
+                prompt: gpt_input,
+                temperature: 0.9,
+                max_tokens: 150,
+                top_p: 1,
+                frequency_penalty: 0.0,
+                presence_penalty: 0.6,
+                stop: [" Human:", " AI:"],
+              }).catch(err => console.error(err));
+              
+                return interaction.followUp(`The User asked the following question:${gpt_input} and recieved the following response from ChatGPT AI: ${gpt_interact.data.choices[0].text}`)
+                
+              }
+            }
+
         
 
-        return interaction.reply("This may take a while to return the data",gpt_interact)
-    }
-}
