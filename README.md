@@ -23,8 +23,8 @@
 - [Usage](#usage)
 - [Contributing](#contributions)
 - [License](#license)
-- [Tests](#test)
-- [Questions](#questions)
+- [Tests](#tests)
+- [Contact](#contact)
 
 ## Installation
 
@@ -55,7 +55,7 @@
 
 ## License
 
-##
+## Apache License
 
    [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
    <https://choosealicense.com/licenses/apache-2.0/>
@@ -70,4 +70,4 @@
 Please Contact Author using the following:
 [Contact Link] jdparris@typefortyproductions.com or www.github.com/jdparris3213
 
-##### made using the awesome README Generator at [Github](https://github.com/jparris3213/ReadMeGenerator)*
+### made using the awesome README Generator at [Github](https://github.com/jparris3213/ReadMeGenerator)*
