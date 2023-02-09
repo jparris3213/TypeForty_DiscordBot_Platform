@@ -12,6 +12,16 @@ function mana_sources(data) {
         return "🌳";
     } else if (data == 'W') {
         return "🌟";
+    } else if (data == 'B,U') {
+        return "💀💧";
+    } else if (data == 'B,U') {
+        return "💀💧";
+    } else if (data == 'B,U') {
+        return "💀💧";
+    } else if (data == 'B,U') {
+        return "💀💧";
+    } else if (data == 'B,U') {
+        return "💀💧";
     } else {
         return data
     }
@@ -34,23 +44,22 @@ module.exports = {
         };
         const color_emoji = await mana_sources(mtg_scry[0].colorIdentity)
 
-        console.log(`User Searched for ${mtg_scry[0].name}`)
-        console.log('Color Identity:', color_emoji, mtg_scry[0].colorIdentity)
-
         const embed = new EmbedBuilder()
 			.setColor(0xEFFF00)
 			.setTitle(mtg_scry[0].name)
-			.setURL('https://discord.js.org')
+            .setDescription(`${mtg_scry[0].supertypes} ${mtg_scry[0].types} - ${mtg_scry[0].subtypes}`)
+			.setURL(`${mtg_scry[0].imageUrl}`|| `https://www.discord.js`)
 			.addFields(
-				{ name: 'Card Description', value: `${mtg_scry[0].text}`},
-				{ name: 'Type', value: `${mtg_scry[0].types}` },
+                { name: 'Description', value: `${mtg_scry[0].text}`},
+				{ name: 'Total Mana Cost', value: `${mtg_scry[0].cmc}`, inline: true},
 				{
-					name: 'Mana',
+					name: 'Mana Color',
 					value: `${color_emoji}`,
+                    inline: true,
 				},
-			);
+            );
 
-        return interaction.editReply({embeds: [embed]})
+        return interaction.editReply({embeds: [embed]}).catch(err => console.log(err))
 
     }
 
