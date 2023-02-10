@@ -1,4 +1,4 @@
-const { SlashCommandBuilder} = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 const mtg = require(`mtgsdk`);
 
 function mana_sources(data) {
@@ -12,6 +12,16 @@ function mana_sources(data) {
         return "🌳";
     } else if (data == 'W') {
         return "🌟";
+    } else if (data == 'B,U') {
+        return "💀💧";
+    } else if (data == 'B,U') {
+        return "💀💧";
+    } else if (data == 'B,U') {
+        return "💀💧";
+    } else if (data == 'B,U') {
+        return "💀💧";
+    } else if (data == 'B,U') {
+        return "💀💧";
     } else {
         return data
     }
@@ -26,33 +36,34 @@ module.exports = {
 
     async execute(interaction) {
         const value = interaction.options.getString('cardname');
+        await interaction.deferReply();
         const mtg_scry = await mtg.card.where({name: value});
 
          if (!mtg_scry.length) {
-            return interaction.reply(`No Results found for ${value}`);
+            return interaction.editReply(`No Results found for ${value}`);
         };
         const color_emoji = await mana_sources(mtg_scry[0].colorIdentity)
 
-        console.log(`User Searched for ${mtg_scry[0].name}`)
-        console.log('Color Identity:', color_emoji, mtg_scry[0].colorIdentity)
-        var description_splice1 = mtg_scry[0].text.slice(0,42)
-        var description_splice2 = mtg_scry[0].text.slice(42,84)
-        var description_splice3 = mtg_scry[0].text.slice(84,126)
-        var description_splice4 = mtg_scry[0].text.slice(126,167)
+        const embed = new EmbedBuilder()
+			.setColor(0xEFFF00)
+			.setTitle(mtg_scry[0].name)
+            .setThumbnail(`https://www.vippng.com/png/detail/419-4193845_magic-the-gathering-clipart-planeswalker-magic-the-gathering.png`)
+            .setDescription(`${mtg_scry[0].supertypes} ${mtg_scry[0].types} - ${mtg_scry[0].subtypes}`)
+			.setURL(`${mtg_scry[0].imageUrl}`|| `https://www.discord.js`)
+			.addFields(
+                
+				{ name: 'Total Mana Cost', value: `${mtg_scry[0].cmc}`, inline: true},
+				{
+					name: 'Mana Color',
+					value: `${color_emoji}`,
+                    inline: true,
+				},
+                { name: `Rarity`, value: `${mtg_scry[0].rarity}`, inline: true},
+                { name: 'Description', value: `${mtg_scry[0].text}`},
+                { name: `Flavor`, value: `${mtg_scry[0].flavor}`},
+            );
 
-        return interaction.reply(
-            `Card Info:
-
-            | Card: ${mtg_scry[0].name}
-            | Colors: ${color_emoji}
-            | Total Mana Cost: ${mtg_scry[0].cmc}
-            | Type: ${mtg_scry[0].types}
-            | Text: 
-            | ${description_splice1}
-            | ${description_splice2}
-            | ${description_splice3}
-            | ${description_splice4}
-            `)
+        return interaction.editReply({embeds: [embed]}).catch(err => console.log(err))
 
     }
 
